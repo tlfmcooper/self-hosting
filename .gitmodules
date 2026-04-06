@@ -1,0 +1,3 @@
+[submodule "scaletail"]
+	path = scaletail
+	url = https://github.com/tailscale-dev/ScaleTail.git
