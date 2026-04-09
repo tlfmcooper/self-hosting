@@ -23,8 +23,3 @@ Uptime Kuma
 ntfy
 Homebox
 mealie
-
--------
-tskey-auth-kuh3LtYnuf11CNTRL-9Mbfp95s74KkCtbTvELv3KH1EyvMjQh3D
-
-docker run cloudflare/cloudflared:latest tunnel --no-autoupdate run --token eyJhIjoiOGRkOTg1Y2MwYmFiZjQwMjRiMmE4ZTQ5YjY4OWUxZWEiLCJ0IjoiNGZjNzNhMWQtNDk4MS00YjNmLTg1MTMtMzY4MTBhMTJlNWQ2IiwicyI6IlpqazNOMkl3T0dNdFpXVmlOeTAwTW1JNExUZ3hOek10TnpFM05qSTBaRFEzWldNMSJ9
