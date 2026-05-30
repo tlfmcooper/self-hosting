@@ -10,6 +10,7 @@ from dotenv import load_dotenv, set_key
 # Light: 512MB
 TARGET_SERVICES = {
     'adguardhome': 'light',
+    'technitium': 'light',
     'tailscale-exit-node': 'light',
     'qbittorrent': 'medium',
     'prowlarr': 'light',
@@ -129,15 +130,17 @@ def process_service(service_name, weight, base_path):
                     alias = f"{service_name}-{s_key}"
                     s_val['container_name'] = alias
 
-                # Fix hardcoded port 53 (common in adguardhome/pihole)
+                # Remove any host-side port 53 binding — DNS must not be public.
+                # Tailscale sidecar services remain reachable on port 53 from Tailnet
+                # without publishing to the host.
                 if 'ports' in s_val:
                     new_ports = []
                     for port_mapping in s_val['ports']:
                         if isinstance(port_mapping, str):
-                            if port_mapping.startswith('0.0.0.0:53:') or port_mapping.startswith('53:'):
-                                updated = port_mapping.replace(':53:', ':5353:').replace(':53/', ':5353/')
-                                print(f"  Updating hardcoded port 53 to 5353 in {s_key}")
-                                new_ports.append(updated)
+                            # Match: "53:53", "0.0.0.0:53:53", "127.0.0.1:53:53", etc.
+                            import re
+                            if re.match(r'^([0-9.]+:)?53:(53|53/(tcp|udp))$', port_mapping):
+                                print(f"  Removing public port 53 binding in {s_key}: {port_mapping}")
                             else:
                                 new_ports.append(port_mapping)
                         else:

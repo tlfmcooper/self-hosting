@@ -1,0 +1,6 @@
+# AdGuard TLS secrets
+scaletail/services/adguardhome/certs/*.pem
+scaletail/services/adguardhome/certs/*.key
+scaletail/services/adguardhome/certs/*.crt
+services
+services.txt
