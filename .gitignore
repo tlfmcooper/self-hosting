@@ -4,3 +4,6 @@ scaletail/services/adguardhome/certs/*.key
 scaletail/services/adguardhome/certs/*.crt
 services
 services.txt
+
+# Riptide artifacts (cloud-synced)
+.humanlayer/tasks/
